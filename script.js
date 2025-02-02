@@ -87,6 +87,46 @@ const Game = (function () {
       gameOver = true;
     }
   }
+
+  function render() {
+    let table = `
+     <table>
+      <tr>
+        <td data-row="0" data-col="0">${gameboard[0][0]}</td>
+        <td data-row="0" data-col="1">${gameboard[0][1]}</td>
+        <td data-row="0" data-col="2">${gameboard[0][2]}</td>
+      </tr>
+      <tr>
+        <td data-row="1" data-col="0">${gameboard[1][0]}</td>
+        <td data-row="1" data-col="1">${gameboard[1][1]}</td>
+        <td data-row="1" data-col="2">${gameboard[1][2]}</td>
+      </tr>
+      <tr>
+        <td data-row="2" data-col="0">${gameboard[2][0]}</td>
+        <td data-row="2" data-col="1">${gameboard[2][1]}</td>
+        <td data-row="2" data-col="2">${gameboard[2][2]}</td>
+      </tr>
+    </table>
+
+        `;
+    return table;
+  }
+
+  function addEventListener() {
+    const cells = document.querySelectorAll("td");
+    cells.forEach((cell) => {
+      cell.addEventListener("click", function () {
+        const row = parseInt(cell.getAttribute("data-row"));
+        const col = parseInt(cell.getAttribute("data-col"));
+        addMarker(row, col); // Call addMarker when a cell is clicked
+      });
+    });
+  }
+  function updateDisplay() {
+    const container = document.querySelector(".container");
+    container.innerHTML = render();
+    addEventListener();
+  }
   function addMarker(row, column) {
     if (gameOver) {
       console.log("Game Over No more Moves allowed");
@@ -97,13 +137,22 @@ const Game = (function () {
     }
 
     gameboard[row][column] = activePlayer.marker;
+
     console.log(
       `Move made by ${activePlayer.name}: ${activePlayer.marker} at (${row}, ${column})`
     );
     checkWinner();
     checkTie();
+    updateDisplay();
+
     if (!gameOver) {
       switchPlayer();
     }
   }
+  function init() {
+    const container = document.querySelector(".container");
+    container.innerHTML = render();
+    addEventListener();
+  }
+  init();
 })();
