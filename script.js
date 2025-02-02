@@ -1,4 +1,18 @@
 const Game = (function () {
+  function domCache() {
+    const container = document.querySelector(".container");
+    const playerOneInfo = document.getElementById("player1");
+    const playerTwoInfo = document.getElementById("player2");
+    const result = document.getElementById("result");
+    const restartBtn = document.getElementById("restart");
+    return {
+      container,
+      playerOneInfo,
+      playerTwoInfo,
+      result,
+      restartBtn,
+    };
+  }
   let gameboard = [
     ["", "", ""],
     ["", "", ""],
@@ -59,13 +73,14 @@ const Game = (function () {
       if (
         gameboard[0][2] === gameboard[1][1] &&
         gameboard[1][1] === gameboard[2][0] &&
-        gameboard[0][0] !== ""
+        gameboard[0][2] !== ""
       ) {
         return true;
       }
       return false;
     }
     if (checkRow() || checkColumn() || checkDiagnoly()) {
+      domCache().result.innerHTML = `${activePlayer.name} wins`;
       console.log(`${activePlayer.name} wins`);
       gameOver = true;
       return true;
@@ -83,6 +98,7 @@ const Game = (function () {
       }
     }
     if (isFull && !checkWinner()) {
+      domCache().result.innerText = "Its a tie";
       console.log("Its a tie");
       gameOver = true;
     }
@@ -122,10 +138,26 @@ const Game = (function () {
       });
     });
   }
+
   function updateDisplay() {
     const container = document.querySelector(".container");
     container.innerHTML = render();
+
     addEventListener();
+  }
+  function restartGame() {
+    domCache().restartBtn.addEventListener("click", () => {
+      gameboard = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+      ];
+      domCache().container.innerHTML = render();
+      activePlayer = player[0];
+      domCache().result.innerText = "";
+      console.log("clicked");
+      init();
+    });
   }
   function addMarker(row, column) {
     if (gameOver) {
@@ -149,10 +181,16 @@ const Game = (function () {
       switchPlayer();
     }
   }
+
   function init() {
     const container = document.querySelector(".container");
     container.innerHTML = render();
     addEventListener();
+    const { playerOneInfo, playerTwoInfo } = domCache();
+    playerOneInfo.innerHTML = `Name: ${player[0].name} Marker ${player[0].marker}`;
+    playerTwoInfo.innerHTML = `Name: ${player[1].name} Marker ${player[1].marker}`;
+    restartGame();
   }
+
   init();
 })();
