@@ -46,3 +46,19 @@ td {
   padding: 10px;
   text-wrap: wrap;
 }
+@media only screen and (max-width: 600px) {
+  table {
+    width: 200px;
+    height: 200px;
+  }
+  td {
+    width: 30px;
+    height: 30px;
+    font-size: 1em;
+  }
+  .playerInfo {
+    width: 60px;
+    height: 40px;
+    font-size: 8px;
+  }
+}
