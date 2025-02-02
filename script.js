@@ -83,6 +83,7 @@ const Game = (function () {
       domCache().result.innerHTML = `${activePlayer.name} wins`;
       console.log(`${activePlayer.name} wins`);
       gameOver = true;
+
       return true;
     }
 
@@ -156,6 +157,7 @@ const Game = (function () {
       activePlayer = player[0];
       domCache().result.innerText = "";
       console.log("clicked");
+      gameOver = false;
       init();
     });
   }
