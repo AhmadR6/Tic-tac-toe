@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-image: url(./src/tic-tac-toe-background.png);
+  display: flex;
+  justify-content: center;
+}
+#main {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 30px;
+}
+table {
+  /* background-color: rgb(255, 255, 255); */
+  /* border-collapse: separate; */
+  border-spacing: 8px;
+  width: 500px;
+  height: 500px;
+  margin: none;
+  padding: none;
+  grid-column: 3/10;
+}
+td {
+  background-color: rgb(246, 241, 241);
+  width: 60px;
+  height: 60px;
+
+  font-size: 3rem;
+  text-align: center;
+  caret-color: transparent;
+}
+.info-container {
+  display: flex;
+  gap: 10px;
+}
+.playerInfo {
+  width: 160px;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  text-wrap: wrap;
+}
