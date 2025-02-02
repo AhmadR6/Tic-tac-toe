@@ -46,6 +46,9 @@ td {
   padding: 10px;
   text-wrap: wrap;
 }
+button {
+  color: black;
+}
 @media only screen and (max-width: 600px) {
   table {
     width: 200px;
@@ -58,7 +61,7 @@ td {
   }
   .playerInfo {
     width: 60px;
-    height: 40px;
+    height: 50px;
     font-size: 8px;
   }
 }
